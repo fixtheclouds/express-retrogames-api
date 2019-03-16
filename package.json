@@ -1,7 +1,7 @@
 {
-  "name": "express-note-api",
+  "name": "express-retrogames-api",
   "version": "0.0.1",
-  "description": "Test express note manager RESTful API",
+  "description": "Test express retro games RESTful API",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fixtheclouds/express-note-api.git"
+    "url": "git+https://github.com/fixtheclouds/express-retrogames-api.git"
   },
   "author": "unsaixpl@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fixtheclouds/express-note-api/issues"
+    "url": "https://github.com/fixtheclouds/express-retrogames-api/issues"
   },
-  "homepage": "https://github.com/fixtheclouds/express-note-api#readme",
+  "homepage": "https://github.com/fixtheclouds/express-retrogames-api#readme",
   "dependencies": {
     "@types/express": "^4.16.1",
     "dotenv": "^7.0.0",
