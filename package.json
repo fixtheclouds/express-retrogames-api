@@ -10,6 +10,11 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "test": "test"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fixtheclouds/express-retrogames-api.git"
@@ -31,7 +36,6 @@
     "nodemon": "^1.18.10",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
-    "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.3.3333"
   }
 }
