@@ -1,6 +1,6 @@
 import express from "express";
 
-export default class GamesController {
+export default class PlatformsController {
   public index(req: express.Request, res: express.Response) {
     res.json("Implement index");
   }
