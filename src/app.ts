@@ -3,8 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 const {
-  MONGO_USER,
-  MONGO_PASSWORD,
+  MONGO_PORT,
   MONGO_PATH
 } = process.env;
 
@@ -13,7 +12,14 @@ class App {
 
   constructor() {
     this.app = express();
-    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_PATH}`);
+    mongoose.connect(
+      `mongodb://localhost:${MONGO_PORT}/${MONGO_PATH}`,
+      {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+      }
+    );
   }
 }
 
