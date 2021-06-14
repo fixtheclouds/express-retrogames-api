@@ -1,8 +1,8 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
   created_at: Date,
-  name: String
+  name: String,
 });
 
-export const Platform = mongoose.model("Platform", schema);
+export default mongoose.model('Platform', schema);

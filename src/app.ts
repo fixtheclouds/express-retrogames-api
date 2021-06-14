@@ -1,10 +1,10 @@
-import "dotenv/config";
-import express from "express";
-import mongoose from "mongoose";
+import 'dotenv/config';
+import express from 'express';
+import mongoose from 'mongoose';
 
 const {
   MONGO_PORT,
-  MONGO_PATH
+  MONGO_PATH,
 } = process.env;
 
 class App {
@@ -18,7 +18,7 @@ class App {
         useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,
-      }
+      },
     );
   }
 }

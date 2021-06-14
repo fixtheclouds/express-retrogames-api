@@ -1,21 +1,22 @@
-import express from "express";
+import express from 'express';
+import PlatformsController from '../../../controllers/PlatformsController';
+
 const router = express.Router();
-import PlatformsController from "../../../controllers/PlatformsController";
 const platformsController = new PlatformsController();
 
 // GET /games
-router.get("/", platformsController.index);
+router.get('/', platformsController.index);
 
 // GET /games/:id
-router.get("/:id", platformsController.show);
+router.get('/:id', platformsController.show);
 
 // POST /games
-router.post("/", platformsController.create);
+router.post('/', platformsController.create);
 
 // PUT /games/:id
-router.put("/:id", platformsController.update);
+router.put('/:id', platformsController.update);
 
 // DELETE /games/:id
-router.delete("/:id", platformsController.destroy);
+router.delete('/:id', platformsController.destroy);
 
 export default router;

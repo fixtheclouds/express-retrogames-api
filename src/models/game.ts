@@ -1,12 +1,12 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
   created_at: Date,
   platform: {
-    ref: "Platform",
-    type: Schema.Types.ObjectId
+    ref: 'Platform',
+    type: Schema.Types.ObjectId,
   },
-  title: String
+  title: String,
 });
 
-export const Game = mongoose.model("Game", schema);
+export default mongoose.model('Game', schema);
