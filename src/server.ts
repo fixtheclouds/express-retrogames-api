@@ -7,5 +7,6 @@ const { PORT } = process.env;
 app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`); // tslint:disable-line:no-console
+  // eslint-disable-next-line no-console
+  console.info(`Server listening on port ${PORT}`);
 });

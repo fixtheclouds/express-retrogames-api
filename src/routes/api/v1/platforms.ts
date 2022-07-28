@@ -1,22 +1,21 @@
 import express from 'express';
-import PlatformsController from '../../../controllers/PlatformsController';
+import { createPlatform } from '../../../controllers/PlatformsController';
 
 const router = express.Router();
-const platformsController = new PlatformsController();
 
 // GET /games
-router.get('/', platformsController.index);
+router.get('/', () => {});
 
 // GET /games/:id
-router.get('/:id', platformsController.show);
+router.get('/:id', () => {});
 
 // POST /games
-router.post('/', platformsController.create);
+router.post('/', createPlatform);
 
 // PUT /games/:id
-router.put('/:id', platformsController.update);
+router.put('/:id', () => {});
 
 // DELETE /games/:id
-router.delete('/:id', platformsController.destroy);
+router.delete('/:id', () => {});
 
 export default router;

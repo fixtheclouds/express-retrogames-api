@@ -1,23 +1,34 @@
 import express from 'express';
+import Platform from '../models/Platform'
 
-export default class PlatformsController {
-  public index(req: express.Request, res: express.Response) {
-    res.json('Implement index');
-  }
+const indexPlatform = (req: express.Request, res: express.Response) => {
+  res.json('Implement index');
+};
 
-  public show(req: express.Request, res: express.Response) {
-    res.json('Implement show');
-  }
+const showPlatform = (req: express.Request, res: express.Response) => {
+  res.json('Implement show');
+};
 
-  public create(req: express.Request, res: express.Response) {
-    res.json('Implement create');
-  }
+const createPlatform = async (req: express.Request, res: express.Response) => {
+  if (!req.body) return res.sendStatus(400);
 
-  public update(req: express.Request, res: express.Response) {
-    res.json('Implement update');
-  }
+  const newPlatform = new Platform({ name: req.body.name });
+  const platform = await newPlatform.save();
+  res.json(platform);
+};
 
-  public destroy(req: express.Request, res: express.Response) {
-    res.json('Implement destroy');
-  }
-}
+const updatePlatform = (req: express.Request, res: express.Response) => {
+  res.json('Implement update');
+};
+
+const destroyPlatform = (req: express.Request, res: express.Response) => {
+  res.json('Implement destroy');
+};
+
+export {
+  indexPlatform,
+  showPlatform,
+  createPlatform,
+  updatePlatform,
+  destroyPlatform,
+};
