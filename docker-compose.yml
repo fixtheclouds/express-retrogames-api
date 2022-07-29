@@ -1,4 +1,8 @@
 version: "3.7"
+
+volumes:
+  mongodb: {}
+
 services:
   mongodb:
     image : mongo:5.0.9
@@ -11,7 +15,3 @@ services:
     ports:
     - 27017:27017
     restart: unless-stopped
-
-volumes:
-  mongodb:
-    driver: local
