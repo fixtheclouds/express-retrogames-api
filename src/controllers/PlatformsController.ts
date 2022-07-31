@@ -1,12 +1,15 @@
 import express from 'express';
 import Platform from '../models/Platform'
 
-const getPlatforms = (req: express.Request, res: express.Response) => {
-  return res.status(200).json('Implement index');
+const getPlatforms = async (req: express.Request, res: express.Response) => {
+  const platforms = await Platform.find();
+  return res.status(200).json(platforms);
 };
 
-const getPlatform = (req: express.Request, res: express.Response) => {
-  return res.json('Implement show');
+const getPlatform = async (req: express.Request, res: express.Response) => {
+  const { id } = req.params;
+  const platform = await Platform.findById(id);
+  return res.status(200).json(platform);
 };
 
 const createPlatform = async (req: express.Request, res: express.Response) => {

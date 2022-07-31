@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPlatforms, createPlatform } from '../../../controllers/PlatformsController';
+import { getPlatforms, getPlatform, createPlatform } from '../../../controllers/PlatformsController';
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', getPlatforms);
 
 // GET /platforms/:id
-router.get('/:id', () => {});
+router.get('/:id', getPlatform);
 
 // POST /platforms
 router.post('/', createPlatform);
