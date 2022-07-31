@@ -1,22 +1,27 @@
 import express from 'express';
-import GamesController from '../../../controllers/GamesController';
+import {
+  getGame,
+  getGames,
+  createGame,
+  updateGame,
+  deleteGame,
+} from '../../../controllers/GamesController';
 
 const router = express.Router();
-const gamesController = new GamesController();
 
 // GET /games
-router.get('/', gamesController.index);
+router.get('/', getGames);
 
 // GET /games/:id
-router.get('/:id', gamesController.show);
+router.get('/:id', getGame);
 
 // POST /games
-router.post('/', gamesController.create);
+router.post('/', createGame);
 
 // PUT /games/:id
-router.put('/', gamesController.update);
+router.put('/', updateGame);
 
 // DELETE /games/:id
-router.delete('/:id', gamesController.destroy);
+router.delete('/:id', deleteGame);
 
 export default router;

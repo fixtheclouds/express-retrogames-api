@@ -1,23 +1,29 @@
 import express from 'express';
 
-export default class GamesController {
-  public index(req: express.Request, res: express.Response) {
-    res.json('Implement index');
-  }
+const getGames = (req: express.Request, res: express.Response) => {
+  return res.json('Implement index');
+};
 
-  public show(req: express.Request, res: express.Response) {
-    res.json('Implement show');
-  }
+const getGame = (req: express.Request, res: express.Response) => {
+  return res.json('Implement show');
+};
 
-  public create(req: express.Request, res: express.Response) {
-    res.json('Implement create');
-  }
+const createGame = (req: express.Request, res: express.Response) => {
+  return res.json('Implement create');
+};
 
-  public update(req: express.Request, res: express.Response) {
-    res.json('Implement update');
-  }
+const updateGame = (req: express.Request, res: express.Response) => {
+  return res.json('Implement update');
+};
 
-  public destroy(req: express.Request, res: express.Response) {
-    res.json('Implement destroy');
-  }
-}
+const deleteGame = (req: express.Request, res: express.Response) => {
+  return res.json('Implement destroy');
+};
+
+export {
+  getGame,
+  getGames,
+  createGame,
+  updateGame,
+  deleteGame,
+};

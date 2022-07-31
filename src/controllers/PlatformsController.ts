@@ -6,7 +6,7 @@ const getPlatforms = (req: express.Request, res: express.Response) => {
 };
 
 const getPlatform = (req: express.Request, res: express.Response) => {
-  res.json('Implement show');
+  return res.json('Implement show');
 };
 
 const createPlatform = async (req: express.Request, res: express.Response) => {
@@ -18,11 +18,11 @@ const createPlatform = async (req: express.Request, res: express.Response) => {
 };
 
 const updatePlatform = (req: express.Request, res: express.Response) => {
-  res.json('Implement update');
+  return res.json('Implement update');
 };
 
 const deletePlatform = (req: express.Request, res: express.Response) => {
-  res.json('Implement delete');
+  return res.json('Implement delete');
 };
 
 export {
