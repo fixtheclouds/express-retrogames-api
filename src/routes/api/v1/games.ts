@@ -18,8 +18,8 @@ router.get('/:id', getGame);
 // POST /games
 router.post('/', createGame);
 
-// PUT /games/:id
-router.put('/', updateGame);
+// PATCH /games/:id
+router.patch('/:id', updateGame);
 
 // DELETE /games/:id
 router.delete('/:id', deleteGame);

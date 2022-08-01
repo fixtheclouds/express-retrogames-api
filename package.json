@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/fixtheclouds/express-retrogames-api#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.182",
     "@types/mongoose": "^5.3.23",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",

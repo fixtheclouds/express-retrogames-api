@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  created_at: Date,
+  year: Number,
   platform: {
     ref: 'Platform',
     type: Schema.Types.ObjectId,
