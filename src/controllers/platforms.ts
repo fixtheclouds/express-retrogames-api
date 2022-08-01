@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Platform from '../models/Platform';
+import { omitBy, isEmpty } from 'lodash';
 
 /* Actions */
 const getPlatforms = async (req: Request, res: Response): Promise<Response> => {
@@ -25,8 +26,9 @@ const updatePlatform = async (req: Request, res: Response): Promise<Response> =>
   if (!req.body) return res.sendStatus(400);
 
   const { id } = req.params;
+  const { name, year } = req.body;
   const platform = await Platform.findById(id);
-  platform.name = req.body.name;
+  Object.assign(platform, omitBy({ name, year }, isEmpty));
   const savedPlatform = await platform.save();
   return res.status(200).json(savedPlatform);
 };

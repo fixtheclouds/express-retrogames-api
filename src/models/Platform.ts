@@ -1,8 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  created_at: Date,
-  name: String,
+  year: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true
+  }
 });
 
 export default mongoose.model('Platform', schema);

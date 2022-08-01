@@ -1,12 +1,19 @@
 import mongoose, { Schema } from 'mongoose';
 
 const schema = new Schema({
-  year: Number,
+  year: {
+    type: Number,
+    required: true
+  },
   platform: {
     ref: 'Platform',
     type: Schema.Types.ObjectId,
+    required: true
   },
-  title: String,
+  title: {
+    type: String,
+    required: true
+  }
 });
 
 export default mongoose.model('Game', schema);
