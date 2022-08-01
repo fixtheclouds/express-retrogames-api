@@ -1,5 +1,11 @@
 import express from 'express';
-import { getPlatforms, getPlatform, createPlatform } from '../../../controllers/PlatformsController';
+import {
+  getPlatforms,
+  getPlatform,
+  createPlatform,
+  updatePlatform,
+  deletePlatform
+} from '../../../controllers/PlatformsController';
 
 const router = express.Router();
 
@@ -12,10 +18,10 @@ router.get('/:id', getPlatform);
 // POST /platforms
 router.post('/', createPlatform);
 
-// PUT /platforms/:id
-router.put('/:id', () => {});
+// PATCH /platforms/:id
+router.patch('/:id', updatePlatform);
 
 // DELETE /platforms/:id
-router.delete('/:id', () => {});
+router.delete('/:id', deletePlatform);
 
 export default router;

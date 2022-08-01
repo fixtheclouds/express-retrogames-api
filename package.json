@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "ts-node src/server.ts",
     "dev": "nodemon",
-    "lint": "eslint --ext .tsx,.ts --fix",
+    "lint": "eslint . --ext .tsx,.ts --fix",
     "test": "test"
   },
   "husky": {

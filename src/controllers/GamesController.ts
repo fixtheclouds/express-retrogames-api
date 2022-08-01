@@ -1,22 +1,22 @@
-import express from 'express';
+import { Request, Response } from 'express';
 
-const getGames = (req: express.Request, res: express.Response) => {
+const getGames = (req: Request, res: Response) => {
   return res.json('Implement index');
 };
 
-const getGame = (req: express.Request, res: express.Response) => {
+const getGame = (req: Request, res: Response) => {
   return res.json('Implement show');
 };
 
-const createGame = (req: express.Request, res: express.Response) => {
+const createGame = (req: Request, res: Response) => {
   return res.json('Implement create');
 };
 
-const updateGame = (req: express.Request, res: express.Response) => {
+const updateGame = (req: Request, res: Response) => {
   return res.json('Implement update');
 };
 
-const deleteGame = (req: express.Request, res: express.Response) => {
+const deleteGame = (req: Request, res: Response) => {
   return res.json('Implement destroy');
 };
 
