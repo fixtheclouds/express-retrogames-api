@@ -1,6 +1,7 @@
 import express from 'express';
-import Platform from '../models/Platform'
+import Platform from '../models/Platform';
 
+/* Actions */
 const getPlatforms = async (req: express.Request, res: express.Response) => {
   const platforms = await Platform.find();
   return res.status(200).json(platforms);
@@ -20,12 +21,20 @@ const createPlatform = async (req: express.Request, res: express.Response) => {
   return res.status(200).json(platform);
 };
 
-const updatePlatform = (req: express.Request, res: express.Response) => {
-  return res.json('Implement update');
+const updatePlatform = async (req: express.Request, res: express.Response) => {
+  if (!req.body) return res.sendStatus(400);
+
+  const { id } = req.params;
+  const platform = await Platform.findById(id);
+  platform.name = req.body.name;
+  const savedPlatform = await platform.save();
+  return res.status(200).json(savedPlatform);
 };
 
-const deletePlatform = (req: express.Request, res: express.Response) => {
-  return res.json('Implement delete');
+const deletePlatform = async (req: express.Request, res: express.Response) => {
+  const { id } = req.params;
+  await Platform.deleteOne({ id });
+  return res.status(200).json(true);
 };
 
 export {
