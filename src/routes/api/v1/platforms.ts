@@ -5,7 +5,7 @@ import {
   createPlatform,
   updatePlatform,
   deletePlatform
-} from '../../../controllers/PlatformsController';
+} from '../../../controllers/platforms';
 
 const router = express.Router();
 

@@ -5,7 +5,7 @@ import {
   createGame,
   updateGame,
   deleteGame,
-} from '../../../controllers/GamesController';
+} from '../../../controllers/games';
 
 const router = express.Router();
 
