@@ -11,14 +11,24 @@ const createGenre = async (req: Request, res: Response): Promise<Response> => {
   if (!req.body) return res.sendStatus(400);
 
   const newGenre = new Genre({ name: req.body.name });
-  const genre = await newGenre.save();
-  return res.status(200).json(genre);
+  try {
+    const genre = await newGenre.save();
+    return res.status(200).json(genre);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 const deleteGenre = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
-  await Genre.deleteOne({ id });
-  return res.status(200).json(true);
+  try {
+    await Genre.deleteOne({ id });
+    return res.status(200).json(true);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 export {

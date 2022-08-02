@@ -10,16 +10,29 @@ const getPlatforms = async (req: Request, res: Response): Promise<Response> => {
 
 const getPlatform = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
-  const platform = await Platform.findById(id);
-  return res.status(200).json(platform);
+  try {
+    const platform = await Platform.findById(id);
+    if (!platform) {
+      return res.status(404).json({ message: `No platform with id ${id}` })
+    }
+    return res.status(200).json(platform);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 const createPlatform = async (req: Request, res: Response): Promise<Response> => {
   if (!req.body) return res.sendStatus(400);
 
   const newPlatform = new Platform({ name: req.body.name });
-  const platform = await newPlatform.save();
-  return res.status(200).json(platform);
+  try {
+    const platform = await newPlatform.save();
+    return res.status(200).json(platform);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 const updatePlatform = async (req: Request, res: Response): Promise<Response> => {
@@ -29,14 +42,24 @@ const updatePlatform = async (req: Request, res: Response): Promise<Response> =>
   const { name, year } = req.body;
   const platform = await Platform.findById(id);
   Object.assign(platform, omitBy({ name, year }, isEmpty));
-  const savedPlatform = await platform.save();
-  return res.status(200).json(savedPlatform);
+  try {
+    const savedPlatform = await platform.save();
+    return res.status(200).json(savedPlatform);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 const deletePlatform = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
-  await Platform.deleteOne({ id });
-  return res.status(200).json(true);
+  try {
+    await Platform.deleteOne({ id });
+    return res.status(200).json(true);
+  } catch (ex) {
+    console.error(ex)
+    return res.status(500).json({ message: ex.message });
+  }
 };
 
 export {
