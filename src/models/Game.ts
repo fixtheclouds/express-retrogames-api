@@ -13,6 +13,10 @@ const schema = new Schema({
   title: {
     type: String,
     required: true
+  },
+  genres: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Genre'
   }
 });
 
