@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import Game from '../models/Game';
 import { omitBy, isEmpty } from 'lodash';
+
+import Game from '../models/Game';
 
 /* Actions */
 const getGames = async (req: Request, res: Response): Promise<Response> => {
-  const games = await Game.find();
+  const games = await Game.find().populate('platform');
   return res.status(200).json(games);
 };
 
@@ -13,7 +14,7 @@ const getGame = async (req: Request, res: Response): Promise<Response> => {
   try {
     const game = await Game.findById(id);
     if (!game) {
-      return res.status(404).json({ message: `No game with id ${id}` })
+      return res.status(404).json({ message: `No game with id ${id}` });
     }
     return res.status(200).json(game);
   } catch (ex) {
@@ -25,10 +26,11 @@ const getGame = async (req: Request, res: Response): Promise<Response> => {
 const createGame = async (req: Request, res: Response): Promise<Response> => {
   if (!req.body) return res.sendStatus(400);
 
+  const { title, year, platformId, genreIds } = req.body;
   const newGame = new Game({
-    title: req.body.title,
-    year: req.body.year,
-    platform: req.body.platformId
+    title,
+    year,
+    platform: platformId
   });
   try {
     const game = await newGame.save();
@@ -58,7 +60,8 @@ const updateGame = async (req: Request, res: Response): Promise<Response> => {
 const deleteGame = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
   try {
-    await Game.deleteOne({ id });
+    const game = await Game.findById(id);
+    await game.remove();
     return res.status(200).json(true);
   } catch (ex) {
     console.error(ex)

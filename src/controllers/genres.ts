@@ -23,7 +23,8 @@ const createGenre = async (req: Request, res: Response): Promise<Response> => {
 const deleteGenre = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
   try {
-    await Genre.deleteOne({ id });
+    const genre = await Genre.findById(id);
+    await genre.remove();
     return res.status(200).json(true);
   } catch (ex) {
     console.error(ex)

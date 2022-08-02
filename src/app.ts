@@ -14,6 +14,7 @@ class App {
 
   constructor() {
     this.app = express();
+    mongoose.set('debug', true)
     mongoose.connect(
       `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_PATH}?authSource=admin`,
       {

@@ -54,7 +54,8 @@ const updatePlatform = async (req: Request, res: Response): Promise<Response> =>
 const deletePlatform = async (req: Request, res: Response): Promise<Response> => {
   const { id } = req.params;
   try {
-    await Platform.deleteOne({ id });
+    const platform = await Platform.findById(id);
+    await platform.remove();
     return res.status(200).json(true);
   } catch (ex) {
     console.error(ex)
