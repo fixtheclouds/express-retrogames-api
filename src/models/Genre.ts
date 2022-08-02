@@ -1,4 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
+
+import IGame from './Game';
+
+export interface IGenre {
+  name: string;
+  games: Array<typeof IGame>;
+}
 
 const schema = new Schema({
   name: {
@@ -6,9 +13,9 @@ const schema = new Schema({
     required: true
   },
   games: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Game'
   }
 });
 
-export default mongoose.model('Genre', schema);
+export default model('Genre', schema);

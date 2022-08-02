@@ -1,6 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const schema = new Schema({
+export interface IPlatform {
+  year: number;
+  name: string;
+}
+
+const schema = new Schema<IPlatform>({
   year: {
     type: Number,
     required: true,
@@ -11,4 +16,4 @@ const schema = new Schema({
   }
 });
 
-export default mongoose.model('Platform', schema);
+export default model('Platform', schema);

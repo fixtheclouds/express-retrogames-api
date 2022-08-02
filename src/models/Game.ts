@@ -1,6 +1,15 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const schema = new Schema({
+import IGenre from './Genre';
+import IPlatform from './Platform';
+interface IGame {
+  year: number;
+  title: string;
+  platform: typeof IPlatform;
+  genres: Array<typeof IGenre>;
+}
+
+const schema = new Schema<IGame>({
   year: {
     type: Number,
     required: true
@@ -15,9 +24,9 @@ const schema = new Schema({
     required: true
   },
   genres: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Genre'
   }
 });
 
-export default mongoose.model('Game', schema);
+export default model('Game', schema);
