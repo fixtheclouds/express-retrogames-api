@@ -7,7 +7,7 @@ export interface IGenre {
   games: Array<typeof IGame>;
 }
 
-const schema = new Schema({
+const schema = new Schema<IGenre>({
   name: {
     type: String,
     required: true
