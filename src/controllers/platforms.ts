@@ -25,7 +25,8 @@ const getPlatform = async (req: Request, res: Response): Promise<Response> => {
 const createPlatform = async (req: Request, res: Response): Promise<Response> => {
   if (!req.body) return res.sendStatus(400);
 
-  const newPlatform = new Platform({ name: req.body.name });
+  const { name, year, manufacturer } = req.body
+  const newPlatform = new Platform({ name, year, manufacturer });
   try {
     const platform = await newPlatform.save();
     return res.status(200).json(platform);
@@ -39,9 +40,9 @@ const updatePlatform = async (req: Request, res: Response): Promise<Response> =>
   if (!req.body) return res.sendStatus(400);
 
   const { id } = req.params;
-  const { name, year } = req.body;
+  const { name, year, manufacturer } = req.body;
   const platform = await Platform.findById(id);
-  Object.assign(platform, omitBy({ name, year }, isEmpty));
+  Object.assign(platform, omitBy({ name, year, manufacturer }, isEmpty));
   try {
     const savedPlatform = await platform.save();
     return res.status(200).json(savedPlatform);
