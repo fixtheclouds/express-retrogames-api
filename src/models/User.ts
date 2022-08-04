@@ -5,7 +5,6 @@ export interface IUser {
   password: string;
   role: string;
   createdAt: Date;
-  lastSignInAt: Date;
 }
 
 const ROLES = ['user', 'admin'];
@@ -24,8 +23,7 @@ const schema = new Schema<IUser>({
     default: 'user',
     enum: ROLES
   },
-  createdAt: Date,
-  lastSignInAt: Date
+  createdAt: Date
 });
 
 export default model('User', schema);
