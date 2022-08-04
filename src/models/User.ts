@@ -4,7 +4,10 @@ export interface IUser {
   login: string;
   password: string;
   role: string;
+  secret: string;
   createdAt: Date;
+  updatedAt: Date;
+  lastSignInAt?: Date;
 }
 
 const ROLES = ['user', 'admin'];
@@ -23,7 +26,11 @@ const schema = new Schema<IUser>({
     default: 'user',
     enum: ROLES
   },
-  createdAt: Date
-});
+  secret: {
+    type: String,
+    required: true
+  },
+  lastSignInAt: Date
+}, { timestamps: true });
 
 export default model('User', schema);
