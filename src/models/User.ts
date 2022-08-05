@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
+import { Schema, Document, model } from 'mongoose';
 
-export interface IUser {
+export interface IUser extends Document {
   login: string;
   password: string;
   role: string;
@@ -11,6 +12,8 @@ export interface IUser {
 }
 
 const ROLES = ['user', 'admin'];
+const SALT_WORK_FACTOR = 10;
+const SECRET_SALT_WORK_FACTOR = 6;
 
 const schema = new Schema<IUser>({
   login: {
@@ -32,5 +35,23 @@ const schema = new Schema<IUser>({
   },
   lastSignInAt: Date
 }, { timestamps: true });
+
+function genereateSecret(): Promise<string> {
+  return bcrypt.genSalt(SECRET_SALT_WORK_FACTOR);
+}
+
+schema.pre('save', async function (this: IUser) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, SALT_WORK_FACTOR);
+  }
+
+  if (this.isNew) {
+    this.secret = await genereateSecret();
+  }
+});
+
+schema.methods.comparePassword = async function(this: IUser, candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+}
 
 export default model('User', schema);
