@@ -31,7 +31,7 @@ const schema = new Schema<IUser>({
   },
   secret: {
     type: String,
-    required: true
+    required: false
   },
   lastSignInAt: Date
 }, { timestamps: true });

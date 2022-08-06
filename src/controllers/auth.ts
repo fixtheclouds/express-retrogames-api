@@ -8,7 +8,7 @@ const signIn = async (req: Request, res: Response): Promise<Response> => {
     const { login, password } = req.body;
 
     const user = await User.findOne({ login });
-    if (!user || !(await user.comparePasswords(password))) {
+    if (!user || !(await user.comparePassword(password))) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
@@ -21,7 +21,18 @@ const signIn = async (req: Request, res: Response): Promise<Response> => {
 }
 
 const signUp = async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200)
+  const { login, password } = req.body;
+
+  try {
+    const user = await User.findOne({ login });
+    if (user) {
+      return res.status(400).json({ message: 'Login is already taken' })
+    }
+    await User.create({ login, password });
+    return res.status(201).json(true)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 
 const signOut = async (req: Request, res: Response): Promise<Response> => {
