@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import jwtService from '../services/jwtService';
+import { IAuthRequest } from '../middleware/authMiddleware';
 import User from '../models/User';
 
 const signIn = async (req: Request, res: Response): Promise<Response> => {
@@ -35,8 +36,17 @@ const signUp = async (req: Request, res: Response): Promise<Response> => {
   }
 }
 
-const signOut = async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200)
+const signOut = async (req: IAuthRequest, res: Response): Promise<Response> => {
+  try {
+    const { user } = req;
+    if (!user) {
+      return res.status(403).json({ message: 'You need to be logged in' })
+    }
+    await user.logout();
+    return res.status(201).json(true)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
 }
 
 export {

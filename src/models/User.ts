@@ -11,6 +11,11 @@ export interface IUser extends Document {
   lastSignInAt?: Date;
 }
 
+export interface IUserDocument extends IUser {
+  logout(): Promise<boolean>;
+  comparePasswords(candidatePassword: string): Promise<boolean>;
+}
+
 const ROLES = ['user', 'admin'];
 const SALT_WORK_FACTOR = 10;
 const SECRET_SALT_WORK_FACTOR = 6;
@@ -50,7 +55,19 @@ schema.pre('save', async function (this: IUser) {
   }
 });
 
-schema.methods.comparePassword = async function(this: IUser, candidatePassword) {
+schema.methods.logout = async function (this: IUser) {
+  this.secret = await genereateSecret();
+  await this.save();
+};
+
+schema.methods.toJSON = function (this: IUser) {
+  const obj = this.toObject();
+  delete obj.password;
+  delete obj.secret;
+  return obj;
+};
+
+schema.methods.comparePassword = async function(this: IUser, candidatePassword: string) {
   return bcrypt.compare(candidatePassword, this.password);
 }
 
