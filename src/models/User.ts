@@ -3,11 +3,11 @@ import { Schema, Document, model } from 'mongoose';
 
 export interface IUser extends Document {
   login: string;
-  password: string;
   role: string;
-  secret: string;
   createdAt: Date;
   updatedAt: Date;
+  password: string;
+  secret?: string;
   lastSignInAt?: Date;
 }
 
@@ -60,12 +60,13 @@ schema.methods.logout = async function (this: IUser) {
   await this.save();
 };
 
-schema.methods.toJSON = function (this: IUser) {
-  const obj = this.toObject();
-  delete obj.password;
-  delete obj.secret;
-  return obj;
-};
+schema.set('toJSON', {
+  transform: (_: unknown, result: { password?: string; __v?: number; secret?: string }) => {
+    delete result.password;
+    delete result.secret;
+    return result;
+  }
+});
 
 schema.methods.comparePassword = async function(this: IUser, candidatePassword: string) {
   return bcrypt.compare(candidatePassword, this.password);
