@@ -14,7 +14,7 @@ const signIn = async (req: Request, res: Response): Promise<Response> => {
     }
 
     return res.status(200).json({
-      accessToken: jwtService.sign({ _id: user._id, login: user.login }),
+      accessToken: jwtService.sign({ _id: user._id, login: user.login }, user.secret),
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });

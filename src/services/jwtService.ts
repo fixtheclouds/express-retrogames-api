@@ -6,16 +6,20 @@ export interface IUserPayload {
 }
 
 class JwtService {
-  sign(payload: IUserPayload): string {
+  sign(payload: IUserPayload, secret: string): string {
     return jwt.sign(
       payload,
-      process.env.JWT_SECRET as string,
+      this.createSecret(secret),
       { expiresIn: process.env.JWT_TTL },
     ) as string;
   }
 
   verify(token: string): IUserPayload {
     return jwt.verify(token, process.env.JWT_SECRET as string) as unknown as IUserPayload;
+  }
+
+  private createSecret(key: string) {
+    return `${process.env.JWT_SECRET}${key}`;
   }
 }
 

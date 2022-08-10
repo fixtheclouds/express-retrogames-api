@@ -17,8 +17,8 @@ class AuthMiddleware {
 
       const token = authHeader.split(' ')[1];
       try {
-        const payload = jwtService.verify(token);
-        const user = await User.findById(payload._id);
+        const { _id } = jwtService.verify(token);
+        const user = await User.findById(_id);
         if (!user) {
           throw new Error('User not found');
         }
