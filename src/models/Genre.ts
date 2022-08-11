@@ -1,10 +1,10 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose'
 
-import IGame from './Game';
+import IGame from './Game'
 
 export interface IGenre {
-  name: string;
-  games: Array<typeof IGame>;
+  name: string
+  games: Array<typeof IGame>
 }
 
 const schema = new Schema<IGenre>({
@@ -16,6 +16,6 @@ const schema = new Schema<IGenre>({
     type: Schema.Types.ObjectId,
     ref: 'Game'
   }
-});
+})
 
-export default model('Genre', schema);
+export default model('Genre', schema)

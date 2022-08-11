@@ -1,22 +1,22 @@
-import express from 'express';
-import authMiddleware from '../../../middleware/authMiddleware';
+import express from 'express'
+import authMiddleware from '../../../middleware/authMiddleware'
 import {
   getUser,
   getCurrentUser,
   deleteUser
-} from '../../../controllers/users';
+} from '../../../controllers/users'
 
-const router = express.Router();
+const router = express.Router()
 
-router.use(authMiddleware.getMiddleware());
+router.use(authMiddleware.getMiddleware())
 // GET /users/current
 // TODO: change routes to avoid login conflicts
-router.get('/current', getCurrentUser);
+router.get('/current', getCurrentUser)
 
 // GET /users/:login
-router.get('/:login', getUser);
+router.get('/:login', getUser)
 
 // DELETE /users
-router.delete('/', deleteUser);
+router.delete('/', deleteUser)
 
-export default router;
+export default router

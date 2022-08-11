@@ -1,9 +1,9 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose'
 
 export interface IPlatform {
-  year: number;
-  name: string;
-  manufacturer: string;
+  year: number
+  name: string
+  manufacturer: string
 }
 
 const schema = new Schema<IPlatform>({
@@ -19,6 +19,6 @@ const schema = new Schema<IPlatform>({
     type: String,
     required: true
   }
-});
+})
 
-export default model('Platform', schema);
+export default model('Platform', schema)

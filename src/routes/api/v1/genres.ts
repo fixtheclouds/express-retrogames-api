@@ -1,19 +1,19 @@
-import express from 'express';
+import express from 'express'
 import {
   getGenres,
   createGenre,
   deleteGenre,
-} from '../../../controllers/genres';
+} from '../../../controllers/genres'
 
-const router = express.Router();
+const router = express.Router()
 
 // GET /genres
-router.get('/', getGenres);
+router.get('/', getGenres)
 
 // POST /genres
-router.post('/', createGenre);
+router.post('/', createGenre)
 
 // DELETE /genres/:id
-router.delete('/:id', deleteGenre);
+router.delete('/:id', deleteGenre)
 
-export default router;
+export default router

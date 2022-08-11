@@ -1,19 +1,19 @@
-import 'dotenv/config';
-import express from 'express';
-import mongoose from 'mongoose';
+import 'dotenv/config'
+import express from 'express'
+import mongoose from 'mongoose'
 
 const {
   MONGO_PORT,
   MONGO_PASSWORD,
   MONGO_PATH,
   MONGO_USER,
-} = process.env;
+} = process.env
 
 class App {
-  public app: express.Application;
+  public app: express.Application
 
   constructor() {
-    this.app = express();
+    this.app = express()
     mongoose.set('debug', true)
     mongoose.connect(
       `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_PATH}?authSource=admin`,
@@ -22,8 +22,8 @@ class App {
         useFindAndModify: false,
         useCreateIndex: true,
       },
-    );
+    )
   }
 }
 
-export default new App().app;
+export default new App().app
