@@ -14,18 +14,18 @@ class AuthMiddleware {
       if (!authHeader) {
         return res.status(401).json({ message: 'Unauthorized' });
       }
-
-      const token = authHeader.split(' ')[1];
       try {
-        const { _id } = jwtService.verify(token);
+        const { _id } = jwtService.decodePayload(authHeader);
         const user = await User.findById(_id);
         if (!user) {
           throw new Error('User not found');
         }
+        jwtService.verify(authHeader, user.secret);
+
         req.user = user;
         return next();
       } catch (error) {
-        return res.status(403).json({ message: 'Forbidden' });
+        return res.status(403).json({ message: error.message });
       }
     };
   }

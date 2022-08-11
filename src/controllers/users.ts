@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { IAuthRequest } from '..//middleware/authMiddleware';
 
 import User from '../models/User';
 
@@ -17,28 +18,18 @@ const getUser = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const createUser = async (req: Request, res: Response): Promise<Response> => {
-  if (!req.body) return res.sendStatus(400);
-
-  const { login, password } = req.body;
-  const newUser = new User({
-    login,
-    password,
-    createdAt: new Date()
-  });
-  try {
-    const user = await newUser.save();
-    return res.status(200).json(user);
-  } catch (ex) {
-    console.error(ex)
-    return res.status(500).json({ message: ex.message });
-  }
+const getCurrentUser = async (req: IAuthRequest, res: Response): Promise<Response> => {
+  return res.status(200).json(req.user)
 };
 
-const deleteUser = async (req: Request, res: Response): Promise<Response> => {
-  const { login } = req.params;
+const deleteUser = async (req: IAuthRequest, res: Response): Promise<Response> => {
+  const { user } = req;
+  if (!user) {
+    return res.status(301).json({ message: 'Not allowed' })
+  }
+
   try {
-    // TODO: Implement deleting current user
+    await user.remove();
     return res.status(200).json(true);
   } catch (ex) {
     console.error(ex)
@@ -48,6 +39,6 @@ const deleteUser = async (req: Request, res: Response): Promise<Response> => {
 
 export {
   getUser,
-  createUser,
+  getCurrentUser,
   deleteUser,
 };
