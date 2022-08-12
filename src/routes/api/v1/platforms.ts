@@ -1,27 +1,21 @@
 import express from 'express'
-import {
-  getPlatforms,
-  getPlatform,
-  createPlatform,
-  updatePlatform,
-  deletePlatform
-} from '../../../controllers/platforms'
+import platformsController from '../../../controllers/PlatformsController'
 
 const router = express.Router()
 
 // GET /platforms
-router.get('/', getPlatforms)
+router.get('/', platformsController.getPlatforms)
 
 // GET /platforms/:id
-router.get('/:id', getPlatform)
+router.get('/:id', platformsController.getPlatform)
 
 // POST /platforms
-router.post('/', createPlatform)
+router.post('/', platformsController.createPlatform)
 
 // PATCH /platforms/:id
-router.patch('/:id', updatePlatform)
+router.patch('/:id', platformsController.updatePlatform)
 
 // DELETE /platforms/:id
-router.delete('/:id', deletePlatform)
+router.delete('/:id', platformsController.deletePlatform)
 
 export default router
