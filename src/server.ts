@@ -2,12 +2,12 @@ import 'dotenv/config'
 import express from 'express'
 
 import app from './app'
-import apiRoutes from './routes/api'
+import apiV1Routes from '@routes/api/v1'
 
 const { PORT } = process.env
 
 app.use(express.json())
-app.use('/api', apiRoutes)
+app.use('/api/v1', apiV1Routes)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
