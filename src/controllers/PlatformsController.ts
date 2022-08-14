@@ -42,6 +42,9 @@ class PlatformsController {
     const { id } = req.params
     const { name, year, manufacturer } = req.body
     const platform = await Platform.findById(id)
+    if (!platform) {
+      return res.status(404).json({ message: 'Not found' })
+    }
     Object.assign(platform, omitBy({ name, year, manufacturer }, isEmpty))
     try {
       const savedPlatform = await platform.save()
@@ -56,6 +59,9 @@ class PlatformsController {
     const { id } = req.params
     try {
       const platform = await Platform.findById(id)
+      if (!platform) {
+        return res.status(404).json({ message: 'Not found' })
+      }
       await platform.remove()
       return res.status(200).json(true)
     } catch (ex) {

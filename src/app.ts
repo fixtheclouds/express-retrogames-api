@@ -2,6 +2,8 @@ import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
 
+import apiV1Routes from '@routes/api/v1'
+
 const {
   MONGO_PORT,
   MONGO_PASSWORD,
@@ -9,21 +11,18 @@ const {
   MONGO_USER,
 } = process.env
 
-class App {
-  public app: express.Application
+const { PORT } = process.env
+const app = express()
 
-  constructor() {
-    this.app = express()
-    mongoose.set('debug', true)
-    mongoose.connect(
-      `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_PATH}?authSource=admin`,
-      {
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      },
-    )
-  }
-}
+mongoose.set('debug', true)
+mongoose.connect(
+  `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_PATH}?authSource=admin`,
+)
 
-export default new App().app
+app.use(express.json())
+app.use('/api/v1', apiV1Routes)
+
+app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
+  console.info(`Server listening on port ${PORT}`)
+})
