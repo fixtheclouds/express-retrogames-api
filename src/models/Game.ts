@@ -1,12 +1,12 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
 
 import IGenre from './Genre'
 import IPlatform from './Platform'
-interface IGame {
+interface IGame extends Document {
   year: number
   title: string
   platform: typeof IPlatform
-  genres: Array<typeof IGenre>
+  genres: typeof IGenre
 }
 
 const schema = new Schema<IGame>({
@@ -29,4 +29,4 @@ const schema = new Schema<IGame>({
   }
 })
 
-export default model('Game', schema)
+export default model<IGame>('Game', schema)

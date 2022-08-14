@@ -24,6 +24,9 @@ class GenresController {
     const { id } = req.params
     try {
       const genre = await Genre.findById(id)
+      if (!genre) {
+        return res.status(404).json({ message: 'Not found' })
+      }
       await genre.remove()
       return res.status(200).json(true)
     } catch (ex) {

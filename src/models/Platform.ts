@@ -21,4 +21,4 @@ const schema = new Schema<IPlatform>({
   }
 })
 
-export default model('Platform', schema)
+export default model<IPlatform>('Platform', schema)

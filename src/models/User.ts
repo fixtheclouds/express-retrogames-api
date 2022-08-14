@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { Schema, Document, model } from 'mongoose'
+import { Schema, Model, Document, model } from 'mongoose'
 
 export interface IUser extends Document {
   login: string
@@ -7,20 +7,22 @@ export interface IUser extends Document {
   createdAt: Date
   updatedAt: Date
   password: string
-  secret?: string
+  secret: string
   lastSignInAt?: Date
 }
 
 export interface IUserDocument extends IUser {
   logout(): Promise<boolean>
-  comparePasswords(candidatePassword: string): Promise<boolean>
+  comparePassword(candidatePassword: string): Promise<boolean>
 }
+
+type IUserModel = Model<IUserDocument>
 
 const ROLES = ['user', 'admin']
 const SALT_WORK_FACTOR = 10
 const SECRET_SALT_WORK_FACTOR = 6
 
-const schema = new Schema<IUser>({
+const schema = new Schema<IUserDocument>({
   login: {
     type: String,
     required: true
@@ -72,4 +74,4 @@ schema.methods.comparePassword = async function(this: IUser, candidatePassword: 
   return bcrypt.compare(candidatePassword, this.password)
 }
 
-export default model('User', schema)
+export default model<IUserDocument, IUserModel>('User', schema)

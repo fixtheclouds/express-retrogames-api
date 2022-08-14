@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { omitBy, isEmpty } from 'lodash'
 
-import Game from '@models/Game'
+import Game from '../models/Game'
 
 class GamesController {
   public async  getGames(req: Request, res: Response): Promise<Response> {
@@ -50,6 +50,10 @@ class GamesController {
     const { id } = req.params
     const { title, platform, year, genres } = req.body
     const game = await Game.findById(id)
+    if (!game) {
+      return res.status(404).json({ message: 'Not found' })
+    }
+
     Object.assign(game, omitBy({ title, year, platform }, isEmpty))
     try {
       const savedGame = await game.save()
@@ -67,6 +71,9 @@ class GamesController {
     const { id } = req.params
     try {
       const game = await Game.findById(id)
+      if (!game) {
+        return res.status(404).json({ message: 'Not found' })
+      }
       await game.remove()
       return res.status(200).json(true)
     } catch (ex) {
