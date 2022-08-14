@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Platform from '../models/Platform'
+import Platform from '@models/Platform'
 import { omitBy, isEmpty } from 'lodash'
 
 class PlatformsController {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { omitBy, isEmpty } from 'lodash'
 
-import Game from '../models/Game'
+import Game from '@models/Game'
 
 class GamesController {
   public async  getGames(req: Request, res: Response): Promise<Response> {

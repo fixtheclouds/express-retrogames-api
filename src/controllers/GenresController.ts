@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Genre from '../models/Genre'
+import Genre from '@models/Genre'
 
 class GenresController {
   public async getGenres(req: Request, res: Response): Promise<Response> {

@@ -1,5 +1,5 @@
 import express from 'express'
-import platformsController from '../../../controllers/PlatformsController'
+import platformsController from '@controllers/PlatformsController'
 
 const router = express.Router()
 

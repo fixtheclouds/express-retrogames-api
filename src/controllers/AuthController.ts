@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 
-import jwtService from '../services/jwtService'
-import { IAuthRequest } from '../middleware/authMiddleware'
-import User from '../models/User'
+import jwtService from '@services/jwtService'
+import { IAuthRequest } from '@middleware/authMiddleware'
+import User from '@models/User'
 
 class AuthController {
   public async signIn(req: Request, res: Response): Promise<Response> {

@@ -10,10 +10,12 @@
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ]
+            "*": ["node_modules/*", "src/*"],
+            "@controllers/*": ["src/controllers/*"],
+            "@middleware/*": ["src/middleware/*"],
+            "@models/*": ["src/models/*"],
+            "@routes/*": ["src/routes/*"],
+            "@services/*": ["src/services/*"],
         },
         "lib": [
             "es2020"

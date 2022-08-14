@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import { IAuthRequest } from '../middleware/authMiddleware'
+import { IAuthRequest } from '@middleware/authMiddleware'
 
-import User from '../models/User'
+import User from '@models/User'
 
 class UsersController {
   public async getUser(req: Request, res: Response): Promise<Response> {

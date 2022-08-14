@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 
-import User, { IUserDocument } from "../models/User"
-import jwtService from "../services/jwtService"
+import User, { IUserDocument } from "@models/User"
+import jwtService from "@services/jwtService"
 
 export interface IAuthRequest extends Request {
   user?: IUserDocument
