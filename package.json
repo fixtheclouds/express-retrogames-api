@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node -r tsconfig-paths/register src/server.ts",
+    "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "dev": "nodemon",
     "lint": "eslint . --ext .tsx,.ts --fix",
     "test": "test"
